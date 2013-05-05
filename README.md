@@ -28,7 +28,7 @@ Basic Usage
 
     {if '{exp:detect_mobile:ismobile}'}
         I am a mobile device
-    {if:else}	
+    {if:else}        
         I am not a mobile device
     {/if}
         
@@ -63,3 +63,9 @@ Basic Usage
     {if:else}
         I am not a mobile device
     {/if}
+
+**Check for platform**
+
+```{{exp:detect_mobile:platform platform="Kindle"}}```
+
+*Supported platform values: iPhone, BlackBerry, HTC, Nexus, Dell, Motorola, Samsung, LG, Sony, Asus, Palm, Vertu, Pantech, Fly, SimValley, GenericPhone, iPad, NexusTablet, SamsungTablet, Kindle, SurfaceTablet, AsusTablet, BlackBerryTablet, HTCtablet, MotorolaTablet, NookTablet, AcerTablet, ToshibaTablet, LGTablet, YarvikTablet, MedionTablet, ArnovaTablet, ArchosTablet, AinolTablet, SonyTablet, CubeTablet, CobyTablet, SMiTTablet, RockChipTablet, TelstraTablet, FlyTablet, bqTablet, HuaweiTablet, NecTablet, PantechTablet, BronchoTablet, VersusTablet, ZyncTablet, PositivoTablet, NabiTablet, PlaystationTablet, GenericTablet, AndroidOS, BlackBerryOS, PalmOS, SymbianOS, WindowsMobileOS, WindowsPhoneOS, iOS, MeeGoOS, MaemoOS, JavaOS, webOS, badaOS, BREWOS, Chrome, Dolfin, Opera, Skyfire, IE, Firefox, Bolt, TeaShark, Blazer, Safari, Tizen, UCBrowser, DiigoBrowser, Puffin, Mercury, GenericBrowser*
