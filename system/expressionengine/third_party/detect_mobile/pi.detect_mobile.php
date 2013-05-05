@@ -12,7 +12,7 @@
  
 $plugin_info = array(
 					'pi_name'			=> 'Detect Mobile',
-					'pi_version'		=> '1.0.5',
+					'pi_version'		=> '1.1.0',
 					'pi_author'			=> 'Gareth Davies',
 					'pi_author_url'		=> 'http://www.garethtdavies.com',
 					'pi_description'	=> 'Plugin that detects a mobile browser using the PHP Detect Mobile class',
@@ -58,6 +58,8 @@ class Detect_mobile {
 		return $this->return_data;
 	}
 	
+	// --------------------------------------------------------------------
+	
 	/**
      * isnotmobile function
 	 * This function simply returns true or false depending on whether a mobile is detected
@@ -69,6 +71,8 @@ class Detect_mobile {
 		return $this->return_data;
 	}
 	
+	// --------------------------------------------------------------------
+	
 	/**
      * istablet function
 	 * This function simply returns true or false depending on whether a tablet is detected
@@ -79,6 +83,8 @@ class Detect_mobile {
 		$this->isTablet ? $this->return_data = TRUE : $this->return_data = FALSE;
 		return $this->return_data;
 	}
+	
+	// --------------------------------------------------------------------
 	
 	/**
      * isphone function
@@ -118,6 +124,23 @@ class Detect_mobile {
 	}
 	
 	// --------------------------------------------------------------------
+	
+	/**
+     * platform function
+	 * This function tests for a specific platform e.g. isiOS, isIphone(), isKindle()
+     */
+	 
+	 public function platform()
+	 {
+		//Retrieve the plugin parameters
+		$platform = $this->EE->TMPL->fetch_param('platform');
+		
+		$this->EE->mobile_detecter->{'is'.$platform}() ? $this->return_data = TRUE : $this->return_data = FALSE;
+		
+		return $this->return_data;
+	 }
+	 
+	 // --------------------------------------------------------------------
 	
 	/**
      * redirect function
@@ -226,11 +249,20 @@ class Detect_mobile {
         Conditional check
         {if '{exp:detect_mobile:type}' == "tablet"}
         	I am a tablet
-        {elseif '{exp:detect_mobile:type}' == "phone"}
+        {if:else:if '{exp:detect_mobile:type}' == "phone"}
         	I am a mobile phone
-        {else}
+        {if:else}
         	I am not a mobile device
         {/if}
+        
+        Check for platform
+        {if '{exp:detect_mobile:platform platform="Kindle"}'} 
+			I am a Kindle
+		{if:else}
+			I am not a Kindle
+		{/if}
+        
+        Supported platform values: iPhone, BlackBerry, HTC, Nexus, Dell, Motorola, Samsung, LG, Sony, Asus, Palm, Vertu, Pantech, Fly, SimValley, GenericPhone, iPad, NexusTablet, SamsungTablet, Kindle, SurfaceTablet, AsusTablet, BlackBerryTablet, HTCtablet, MotorolaTablet, NookTablet, AcerTablet, ToshibaTablet, LGTablet, YarvikTablet, MedionTablet, ArnovaTablet, ArchosTablet, AinolTablet, SonyTablet, CubeTablet, CobyTablet, SMiTTablet, RockChipTablet, TelstraTablet, FlyTablet, bqTablet, HuaweiTablet, NecTablet, PantechTablet, BronchoTablet, VersusTablet, ZyncTablet, PositivoTablet, NabiTablet, PlaystationTablet, GenericTablet, AndroidOS, BlackBerryOS, PalmOS, SymbianOS, WindowsMobileOS, WindowsPhoneOS, iOS, MeeGoOS, MaemoOS, JavaOS, webOS, badaOS, BREWOS, Chrome, Dolfin, Opera, Skyfire, IE, Firefox, Bolt, TeaShark, Blazer, Safari, Tizen, UCBrowser, DiigoBrowser, Puffin, Mercury, GenericBrowser
         <?php
         $buffer = ob_get_contents();
         ob_end_clean();
